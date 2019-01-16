@@ -93,7 +93,7 @@ def main(dir, user, storage):
 
 
 if __name__ == '__main__':
-    title = 'Files Copier for Brain Games'
+    title = 'Files Copier'
     try:
         if os.path.isdir(storage):
             main(dir, user, storage)
@@ -104,7 +104,7 @@ if __name__ == '__main__':
         else:
             email(user)
             ctypes.windll.user32.MessageBoxW(0,
-            'Aww!\nThere is no network folder for the user \'{}\' in the storage!\nTo thhe system administrator was sent a request letter to add.\nThanks!'.format(user),
+            'Aww!\nThere is no network folder for the user \'{}\' in the storage!\nTo the system administrator was sent a request letter to add.\nThanks!'.format(user),
             title, 64)
     except PermissionError:
         ctypes.windll.user32.MessageBoxW(0,
