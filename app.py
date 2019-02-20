@@ -17,10 +17,9 @@ def mkshortcut(link):
 
     desktop = winshell.desktop()
     path = os.path.join(desktop, "Share.lnk")
-    target = link
     shell = Dispatch('WScript.Shell')
     shortcut = shell.CreateShortCut(path)
-    shortcut.Targetpath = target
+    shortcut.Targetpath = link
     shortcut.save()
 
 # sending email if it needed
@@ -61,18 +60,19 @@ def filesync(obj, user, storage):
         if obj.endswith(ft):
             try:
                 head, tail = os.path.split(obj)
+                directory = storage + head.split(os.sep)[-1]
+                if not os.path.exists(directory):
+                    os.makedirs(directory)
                 rmfile = storage + '\\' + tail
                 if os.path.isfile(rmfile):
                     if os.path.getmtime(obj) > os.path.getmtime(rmfile):
                         shutil.copy(obj, rmfile)
-                        text = 'replaced in'
-                        wlog(obj, storage, text)
+                        wlog(obj, storage, 'replaced in {}\\'.format(directory))
                     else:
                         pass
                 else:
                     shutil.copy(obj, rmfile)
-                    text = 'copied to'
-                    wlog(obj, storage, text)
+                    wlog(obj, storage, 'copied to {}\\'.format(directory))
             except FileNotFoundError or PermissionError:
                 pass
 
