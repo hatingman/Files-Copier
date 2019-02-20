@@ -1,6 +1,6 @@
 # Files Copier
 # # # # # # # #
-# autor https://github.com/hatingman
+# autor m80b33
 
 
 import os, shutil, ctypes
